@@ -1,43 +1,15 @@
 # A printf / sprintf Implementation for Embedded Systems
+ccprintf is a C++ fork of the wonderful [mpaland/printf](https://github.com/mpaland/printf). 
+It provides:
+* strongly typed c-style printf
+* constexpr support
 
-[![Build Status](https://travis-ci.org/mpaland/printf.svg?branch=master)](https://travis-ci.org/mpaland/printf)
-[![codecov](https://codecov.io/gh/mpaland/printf/branch/master/graph/badge.svg)](https://codecov.io/gh/mpaland/printf)
-[![Coverity Status](https://img.shields.io/coverity/scan/14180.svg)](https://scan.coverity.com/projects/mpaland-printf)
-[![Github Issues](https://img.shields.io/github/issues/mpaland/printf.svg)](http://github.com/mpaland/printf/issues)
-[![Github Releases](https://img.shields.io/github/release/mpaland/printf.svg)](https://github.com/mpaland/printf/releases)
-[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mpaland/avl_array/master/LICENSE)
+ccprintf is not intended to be used directly; it serves as the basis for the [{fmt}](https://github.com/fmtlib/fmt)-style API provided by [utl](https://github.com/ashandore/utl)'s format header.
 
-This is a tiny but **fully loaded** printf, sprintf and (v)snprintf implementation.
-Primarily designed for usage in embedded systems, where printf is not available due to memory issues or in avoidance of linking against libc.
-Using the standard libc printf may pull **a lot** of unwanted library stuff and can bloat code size about 20k or is not 100% thread safe. In this cases the following implementation can be used.
-Absolutely **NO dependencies** are required, *printf.c* brings all necessary routines, even its own fast `ftoa` (floating point), `ntoa` (decimal) conversion.
+## Memory Usage
 
 If memory footprint is really a critical issue, floating point, exponential and 'long long' support and can be turned off via the `PRINTF_DISABLE_SUPPORT_FLOAT`, `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG` compiler switches.
 When using printf (instead of sprintf/snprintf) you have to provide your own `_putchar()` low level function as console/serial output.
-
-
-## 2020 announcement
-This project is not dead! I just had no time in 2019 for sufficient support, sorry.
-Within the next weeks, I will have a look to all PRs and open issues.  
-Thank you all for supporting this project.
-
-
-## Highlights and Design Goals
-
-There is a boatload of so called 'tiny' printf implementations around. So why this one?
-I've tested many implementations, but most of them have very limited flag/specifier support, a lot of other dependencies or are just not standard compliant and failing most of the test suite.
-Therefore I decided to write an own, final implementation which meets the following items:
-
- - Very small implementation (around 600 code lines)
- - NO dependencies, no libs, just one module file
- - Support of all important flags, width and precision sub-specifiers (see below)
- - Support of decimal/floating number representation (with an own fast itoa/ftoa)
- - Reentrant and thread-safe, malloc free, no static vars/buffers
- - LINT and compiler L4 warning free, mature, coverity clean, automotive ready
- - Extensive test suite (> 400 test cases) passing
- - Simply the best *printf* around the net
- - MIT license
-
 
 ## Usage
 
@@ -186,26 +158,6 @@ None anymore (finally).
 ## Test Suite
 For testing just compile, build and run the test suite located in `test/test_suite.cpp`. This uses the [catch](https://github.com/catchorg/Catch2) framework for unit-tests, which is auto-adding main().
 Running with the `--wait-for-keypress exit` option waits for the enter key after test end.
-
-
-## Projects Using printf
-- [turnkeyboard](https://github.com/mpaland/turnkeyboard) uses printf as log and generic tty (formatting) output.
-- printf is part of [embeddedartistry/libc](https://github.com/embeddedartistry/libc), a libc targeted for embedded systems usage.
-- The [Hatchling Platform]( https://github.com/adrian3git/HatchlingPlatform) uses printf.
-
-(Just send me a mail/issue/PR to get *your* project listed here)
-
-
-## Contributing
-
-0. Give this project a :star:
-1. Create an issue and describe your idea
-2. [Fork it](https://github.com/mpaland/printf/fork)
-3. Create your feature branch (`git checkout -b my-new-feature`)
-4. Commit your changes (`git commit -am 'Add some feature'`)
-5. Publish the branch (`git push origin my-new-feature`)
-6. Create a new pull request
-7. Profit! :heavy_check_mark:
 
 
 ## License
