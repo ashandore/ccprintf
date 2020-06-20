@@ -1,4 +1,4 @@
-# A printf / sprintf Implementation for Embedded Systems
+# A C++20 printf / sprintf Implementation for Embedded Systems
 ccprintf is a C++ fork of the wonderful [mpaland/printf](https://github.com/mpaland/printf). 
 It provides:
 * strongly typed c-style printf
